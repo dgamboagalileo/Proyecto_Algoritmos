@@ -1,5 +1,6 @@
 import pandas
 import re
+import math
 
 #Evaluación REGREX
 def evaluate_Fx(str_equ, valX):
@@ -35,20 +36,35 @@ def evaluate_derivate_fx(str_equ, x, h):
 def finite_difference(str_equ, x, h):
     #Hacía adelante
     strOut=str_equ.replace("x", x)
-    strOut = strOut.replace("^", "**")
+    strOut =strOut.replace("^", "**")
     strOut="-1*("+strOut+")"
+    strOut=strOut.replace("e**-0", "math.exp(-0)")
+    strOut=strOut.replace("e**-1", "*math.exp(-1)")
+    strOut=strOut.replace("sin", "math.sin")
+    strOut=strOut.replace("sen", "math.sin")
+    #print(strOut)
     out=eval(strOut)
     
     strOut = str_equ.replace("x", '(x + h)')
     strOut = strOut.replace("^", "**")
     strOut = strOut.replace("x", x)
     strOut = strOut.replace("h", h)
+    strOut=strOut.replace("e**-(0 + 0.05)", "math.exp(-(0 + 0.05))")
+    strOut=strOut.replace("e**-(1 + 0.05)", "*math.exp(-(1 + 0.05))")
+    strOut=strOut.replace("sin", "math.sin")
+    strOut=strOut.replace("sen", "math.sin")
+    #print(strOut)
     out=eval(strOut)+out
     difAdelante = out/float(h)
     
     #Hacía atras
     strOut=str_equ.replace("x", x)
     strOut = strOut.replace("^", "**")
+    strOut=strOut.replace("e**-0", "math.exp(-0)")
+    strOut=strOut.replace("e**-1", "*math.exp(-1)")
+    strOut=strOut.replace("sin", "math.sin")
+    strOut=strOut.replace("sen", "math.sin")
+    #print(strOut)
     out=eval(strOut)
     
     strOut = str_equ.replace("x", '(x - h)')
@@ -56,6 +72,11 @@ def finite_difference(str_equ, x, h):
     strOut = strOut.replace("x", x)
     strOut = strOut.replace("h", h)
     strOut="-1*("+strOut+")"
+    strOut=strOut.replace("e**-(0 - 0.05)", "math.exp(-(0 - 0.05))")
+    strOut=strOut.replace("e**-(1 - 0.05)", "*math.exp(-(1 - 0.05))")
+    strOut=strOut.replace("sin", "math.sin")
+    strOut=strOut.replace("sen", "math.sin")
+    #print(strOut)
     out=eval(strOut)+out
     difAtras = out/float(h)
     
@@ -64,6 +85,11 @@ def finite_difference(str_equ, x, h):
     strOut = strOut.replace("^", "**")
     strOut = strOut.replace("x", x)
     strOut = strOut.replace("h", h)
+    strOut=strOut.replace("e**-(0 + 0.05)", "math.exp(-(0 + 0.05))")
+    strOut=strOut.replace("e**-(1 + 0.05)", "*math.exp(-(1 + 0.05))")
+    strOut=strOut.replace("sin", "math.sin")
+    strOut=strOut.replace("sen", "math.sin")
+    #print(strOut)
     out=eval(strOut)
     
     strOut = str_equ.replace("x", '(x - h)')
@@ -71,6 +97,11 @@ def finite_difference(str_equ, x, h):
     strOut = strOut.replace("x", x)
     strOut = strOut.replace("h", h)
     strOut="-1*("+strOut+")"
+    strOut=strOut.replace("e**-(0 - 0.05)", "math.exp(-(0 - 0.05))")
+    strOut=strOut.replace("e**-(1 - 0.05)", "*math.exp(-(1 - 0.05))")
+    strOut=strOut.replace("sin", "math.sin")
+    strOut=strOut.replace("sen", "math.sin")
+    #print(strOut)
     out=eval(strOut)+out
     
     difCentral=out/(2*float(h))
